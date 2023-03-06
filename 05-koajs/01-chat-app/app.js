@@ -23,7 +23,7 @@ const messageSource = new MessageSource();
 
 router.get('/subscribe', async (ctx, next) => {
   const getMessage = new Promise((resolve) => {
-    messageSource.on('recieved', (newMessage) => {
+    messageSource.once('recieved', (newMessage) => {
       resolve(newMessage);
     });
   });
