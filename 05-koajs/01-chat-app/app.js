@@ -28,6 +28,12 @@ router.get('/subscribe', async (ctx, next) => {
     });
   });
 
+  ctx.req.on('close', () => {
+    messageSource.removeAllListeners('recieved');
+    ctx.res.statusCode = 500
+    ctx.res.end()
+  })
+
   try {
     const message = await getMessage;
     ctx.response.body = `${message}`;
